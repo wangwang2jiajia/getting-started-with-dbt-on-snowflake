@@ -35,3 +35,13 @@ ALTER WAREHOUSE tasty_bytes_dbt_wh SET WAREHOUSE_SIZE = SMALL;
 select count(*) from tasty_bytes_dbt_db.raw.order_detail
 
 select count(*) from tasty_bytes_dbt_db.dev.raw_pos_order_detail
+
+
+-- If you want to keep this setup, suspend the task to stop scheduled runs:
+ALTER TASK IF EXISTS tasty_bytes_dbt_db.dev.run_prepped_data_dbt SUSPEND;
+
+-- If you want to remove this setup, drop the task, warehouse, and databases:
+DROP TASK IF EXISTS tasty_bytes_dbt_db.dev.run_prepped_data_dbt;
+DROP WAREHOUSE IF EXISTS tasty_bytes_dbt_wh;
+DROP DATABASE IF EXISTS tasty_bytes_dbt_db;
+DROP DATABASE IF EXISTS tb_101;
