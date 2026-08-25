@@ -300,32 +300,9 @@ FROM @tasty_bytes_dbt_db.public.s3load/raw_pos/truck/;
 COPY INTO tasty_bytes_dbt_db.raw.customer_loyalty
 FROM @tasty_bytes_dbt_db.public.s3load/raw_customer/customer_loyalty/;
 
-delete from tasty_bytes_dbt_db.raw.order_header
-select * from tasty_bytes_dbt_db.raw.order_header
-select * from tasty_bytes_dbt_db.raw.order_header_RECOVER
 -- order_header table load
 COPY INTO tasty_bytes_dbt_db.raw.order_header
 FROM @tasty_bytes_dbt_db.public.s3load/raw_pos/order_header/;
-
-SELECT
-    QUERY_ID,
-    USER_NAME,
-    START_TIME,
-    QUERY_TEXT
-FROM TABLE(
-    INFORMATION_SCHEMA.QUERY_HISTORY()
-)
-WHERE QUERY_TEXT ILIKE '%DELETE%'
-ORDER BY START_TIME DESC;
-
-CREATE TABLE tasty_bytes_dbt_db.raw.order_header_RECOVER AS
-SELECT *
-FROM tasty_bytes_dbt_db.raw.order_header
-BEFORE(STATEMENT => '01c69e26-0304-7ed2-0004-ffd20039d9d6');
-
-drop table tasty_bytes_dbt_db.raw.order_header
-ALTER TABLE tasty_bytes_dbt_db.raw.order_header_RECOVER
-RENAME TO tasty_bytes_dbt_db.raw.order_header;
 
 -- order_detail table load
 COPY INTO tasty_bytes_dbt_db.raw.order_detail
@@ -336,9 +313,3 @@ FROM @tasty_bytes_dbt_db.public.s3load/raw_pos/order_detail/;
 -- =============================================================================
 
 SELECT 'tasty_bytes_dbt_db setup is now complete' AS note;
-
-ALTER WAREHOUSE tasty_bytes_dbt_wh SET WAREHOUSE_SIZE = SMALL;
-
-select count(*) from tasty_bytes_dbt_db.raw.order_detail
-
-select count(*) from tasty_bytes_dbt_db.dev.raw_pos_order_detail
