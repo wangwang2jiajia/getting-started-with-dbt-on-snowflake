@@ -45,3 +45,27 @@ DROP TASK IF EXISTS tasty_bytes_dbt_db.dev.run_prepped_data_dbt;
 DROP WAREHOUSE IF EXISTS tasty_bytes_dbt_wh;
 DROP DATABASE IF EXISTS tasty_bytes_dbt_db;
 DROP DATABASE IF EXISTS tb_101;
+
+USE DATABASE tasty_bytes_dbt_db
+
+SELECT *
+FROM INFORMATION_SCHEMA.LOAD_HISTORY
+where table_name = 'ORDER_DETAIL'
+
+TRUNCATE TABLE tasty_bytes_dbt_db.raw.order_header;
+
+COPY INTO tasty_bytes_dbt_db.raw.order_header
+FROM @tasty_bytes_dbt_db.public.s3load/raw_pos/order_header/
+FORCE = TRUE;
+
+--DELETE
+--= 删数据
+--= 保留Load History
+
+--TRUNCATE
+--= 删数据
+--= 删除Load History
+
+--DROP
+--= 删表
+--= 表都没了
