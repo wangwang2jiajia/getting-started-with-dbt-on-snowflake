@@ -9,6 +9,7 @@ permissions:
   contents: read
   id-token: write
 
+# For Snowflake CLI 3.24.x
 env:
   SNOWFLAKE_CLI_FEATURES_ENABLE_DBT_PROJECT_PROFILES_FILE_PRECEDENCE: "true"
 
