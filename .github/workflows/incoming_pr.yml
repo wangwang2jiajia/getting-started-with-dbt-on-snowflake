@@ -9,9 +9,6 @@ permissions:
   contents: read
   id-token: write
 
-env:
-  SNOWFLAKE_CLI_FEATURES_ENABLE_DBT_PROJECT_PROFILES_FILE_PRECEDENCE: "true"
-
 jobs:
   run-snowflake-test-dbt-job:
     name: "Run on Incoming PR"
