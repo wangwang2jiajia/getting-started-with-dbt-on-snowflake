@@ -44,7 +44,7 @@ CREATE USER IF NOT EXISTS github_actions_service_user
   WORKLOAD_IDENTITY = (
     TYPE = OIDC
     ISSUER = 'https://token.actions.githubusercontent.com',
-    SUBJECT = 'repo:wangwang2jiajia/getting-started-with-dbt-on-snowflake:environment:prod'
+    SUBJECT = 'repo:wangwang2jiajia@155052497/getting-started-with-dbt-on-snowflake@1345592012:environment:prod'
   )
   DEFAULT_ROLE = ACCOUNTADMIN
   COMMENT = 'Service user for GitHub Actions';
