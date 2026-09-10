@@ -9,7 +9,7 @@ tasty_bytes:
       type: snowflake
       warehouse: TASTY_BYTES_DBT_WH
       user: '_' # Put any value here, it will be overwritten by a CI/CD platform secret or variable
-      threads: 8 # Snowflake recommends 8 threads
+      threads: 8 # recommends 8 threads
     prod:
       account: '_' # Put any value here, it will be overwritten by a CI/CD platform secret or variable
       database: tasty_bytes_dbt_db
@@ -18,4 +18,4 @@ tasty_bytes:
       type: snowflake
       warehouse: TASTY_BYTES_DBT_WH
       user: '_' # Put any value here, it will be overwritten by a CI/CD platform secret or variable
-      threads: 8 # Snowflake recommends 8 threads
+      threads: 8 # recommends 8 threads
